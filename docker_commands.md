@@ -37,37 +37,6 @@ docker push alien7666/yearprogress:latest
 docker pull alien7666/yearprogress:latest
 ```
 
-## 運行容器
-
-```bash
-# 運行容器並使用主機網路
-docker run -d --network=host --name yp-app alien7666/yearprogress:latest
-```
-
-```bash
-# 如果不想使用主機網路，也可以在bridge網路下使用主機的IP地址來連接
-docker run -d -p 4001:3000 --add-host=host.docker.internal:host-gateway --name yp-app alien7666/yearprogress:latest
-```
-
-```bash
-# 使用環境變數指定資料庫連接資訊
-docker run -d -p 4001:3000 \
-  -e DB_HOST="192.168.0.10" \
-  -e DB_PORT="3306" \
-  -e DB_USER="YearProgres" \
-  -e DB_PASSWORD="5YSwPDW7wnBnbGai" \
-  -e DB_NAME="YearProgres" \
-  --name yp-app alien7666/yearprogress:latest
-```
-
-```bash
-# 使用環境變數並指定主機網路，如果您的資料庫是在同一台主機上
-docker run -d \
-  -e DB_HOST="127.0.0.1" \
-  --network=host \
-  --name yearprogress-app alien7666/yearprogress:latest
-```
-
 ## 使用Docker網路連接容器（推薦使用）
 
 如果您的MySQL也是在Docker容器中運行，最好的方法是創建一個共用的Docker網路，來連接資料庫和應用程式。
